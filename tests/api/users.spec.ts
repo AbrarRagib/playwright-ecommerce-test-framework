@@ -7,6 +7,14 @@ import { test, expect } from '@playwright/test';
  */
 const API_BASE = 'https://reqres.in/api';
 
+// reqres.in now requires an API key on every request; without it, all calls
+// return 401. The free public key is documented on reqres.in itself.
+test.use({
+  extraHTTPHeaders: {
+    'x-api-key': 'reqres-free-v1',
+  },
+});
+
 test.describe('Users API', () => {
   test('GET /users/2 returns a single user', async ({ request }) => {
     const response = await request.get(`${API_BASE}/users/2`);

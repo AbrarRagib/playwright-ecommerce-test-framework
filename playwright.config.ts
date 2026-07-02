@@ -25,16 +25,24 @@ export default defineConfig({
   },
 
   projects: [
+    // API tests don't need a browser — run them once, not 3x.
+    {
+      name: 'api',
+      testMatch: /api\/.*\.spec\.ts/,
+    },
     {
       name: 'chromium',
+      testMatch: /ui\/.*\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'firefox',
+      testMatch: /ui\/.*\.spec\.ts/,
       use: { ...devices['Desktop Firefox'] },
     },
     {
       name: 'webkit',
+      testMatch: /ui\/.*\.spec\.ts/,
       use: { ...devices['Desktop Safari'] },
     },
   ],
